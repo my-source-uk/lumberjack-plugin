@@ -1,0 +1,54 @@
+{
+    "name": "my-source/lumberjack",
+    "description": "LumberJack - Logging laravel site usage the easy way.",
+    "keywords": [
+        "my-source",
+        "lumberjack"
+    ],
+    "homepage": "https://github.com/my-source/lumberjack",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Richard Browne",
+            "email": "richard@my-source.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MySource\\Lumberjack\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MySource\\Lumberjack\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MySource\\Lumberjack\\LumberjackServiceProvider"
+            ],
+            "aliases": {
+                "Lumberjack": "MySource\\Lumberjack\\LumberjackFacade"
+            }
+        }
+    }
+}
