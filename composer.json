@@ -2,7 +2,7 @@
     "name": "my-source/lumberjack",
     "description": "LumberJack - Logging laravel site usage the easy way.",
     "keywords": [
-        "my-source",
+        "my-source-uk",
         "lumberjack"
     ],
     "homepage": "https://github.com/my-source/lumberjack",
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MySource\\Lumberjack\\": "src"
+            "mysource\\Lumberjack\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MySource\\Lumberjack\\Tests\\": "tests"
+            "mysource\\Lumberjack\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MySource\\Lumberjack\\LumberjackServiceProvider"
+                "mysource\\Lumberjack\\LumberjackServiceProvider"
             ],
             "aliases": {
-                "Lumberjack": "MySource\\Lumberjack\\LumberjackFacade"
+                "Lumberjack": "mysource\\Lumberjack\\LumberjackFacade"
             }
         }
     }
