@@ -4,3 +4,4 @@ vendor
 coverage
 node_modules
 .DS_Store
+.php_cs.cache
