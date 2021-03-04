@@ -1,22 +1,22 @@
 {
-    "name": "my-source/lumberjack",
-    "description": "LumberJack - Logging laravel site usage the easy way.",
+    "name": "my-source-uk/lumberjack-plugin",
+    "description": "LumberJack - Logging laravel plugin for site usage the easy way.",
     "keywords": [
         "my-source-uk",
         "lumberjack"
     ],
-    "homepage": "https://github.com/my-source/lumberjack",
+    "homepage": "https://github.com/my-source-uk/lumberjack-plugin",
     "license": "MIT",
     "type": "library",
     "authors": [
         {
             "name": "Richard Browne",
-            "email": "richard@my-source.co.uk",
+            "email": "hello@my-source.co.uk",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.1 || ^8.0",
         "illuminate/support": "^6.0"
     },
     "require-dev": {
@@ -25,18 +25,17 @@
     },
     "autoload": {
         "psr-4": {
-            "mysource\\Lumberjack\\": "src"
+            "Lumberjack\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "mysource\\Lumberjack\\Tests\\": "tests"
+            "Lumberjack\\Tests\\": "tests"
         }
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
     },
     "config": {
         "sort-packages": true
@@ -44,10 +43,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "mysource\\Lumberjack\\LumberjackServiceProvider"
+                "Lumberjack\\LumberjackServiceProvider"
             ],
             "aliases": {
-                "Lumberjack": "mysource\\Lumberjack\\LumberjackFacade"
+                "Lumberjack": "Lumberjack\\LumberjackFacade"
             }
         }
     }

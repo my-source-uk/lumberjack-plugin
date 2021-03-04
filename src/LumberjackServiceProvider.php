@@ -1,51 +1,40 @@
 <?php
 
-namespace MySource\Lumberjack;
+namespace Lumberjack;
 
 use Illuminate\Support\ServiceProvider;
+use Lumberjack\Http\Middleware\LumberjackLogger;
 
 class LumberjackServiceProvider extends ServiceProvider
 {
+    use ServiceBindings;
     /**
      * Bootstrap the application services.
+     *
+     * @return void
      */
     public function boot()
     {
         /*
          * Optional methods to load your package assets
          */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'lumberjack');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'lumberjack');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('lumberjack.php'),
-            ], 'config');
+        if (true === $this->app->runningInConsole()) {
+            $this->publishes(
+                [
+                    __DIR__.'/../config/config.php' => config_path('lumberjack.php'),
+                ],
+                'config'
+            );
+        }//end if
 
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/lumberjack'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/lumberjack'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/lumberjack'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
-        }
+        $this->configureMiddleware();
     }
 
     /**
      * Register the application services.
+     *
+     * @return void
      */
     public function register()
     {
@@ -53,8 +42,23 @@ class LumberjackServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'lumberjack');
 
         // Register the main class to use with the facade
-        $this->app->singleton('lumberjack', function () {
-            return new Lumberjack;
-        });
+        $this->app->singleton(
+            'lumberjack',
+            function () {
+                return new Lumberjack;
+            }
+        );
+    }
+
+    /**
+     * Configure the Sanctum middleware and priority.
+     *
+     * @return void
+     */
+    protected function configureMiddleware()
+    {
+        $kernel = $this->app->make(Kernel::class);
+
+        $kernel->appendToMiddlewarePriority(LumberjackLogger::class);
     }
 }
