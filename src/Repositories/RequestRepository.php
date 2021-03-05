@@ -60,7 +60,10 @@ class RequestRepository extends BaseRepository implements Contract
     {
         DB::connection('lumberjack')->transaction(
             function () use ($data) {
-                $existing = $this->model->firstWhere('page_signature', $data['page_signature']);
+                $existing = $this->model
+                    ->orderBy('id', 'DESC')
+                    ->firstWhere('page_signature', $data['page_signature']);
+                    
                 if (false === is_null($existing)) {
                     // We have an existing record:
                     $data['is_new_visit'] = false;
