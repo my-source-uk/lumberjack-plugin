@@ -4,6 +4,7 @@ namespace Lumberjack;
 
 use Illuminate\Support\ServiceProvider;
 use Lumberjack\Http\Middleware\LumberjackLogger;
+use Illuminate\Contracts\Http\Kernel;
 
 class LumberjackServiceProvider extends ServiceProvider
 {
@@ -24,7 +25,7 @@ class LumberjackServiceProvider extends ServiceProvider
                 [
                     __DIR__.'/../config/config.php' => config_path('lumberjack.php'),
                 ],
-                'config'
+                'lumberjack-config'
             );
         }//end if
 
@@ -48,6 +49,20 @@ class LumberjackServiceProvider extends ServiceProvider
                 return new Lumberjack;
             }
         );
+
+        $this->registerServices();
+    }
+
+    /**
+     * Register the services in the container.
+     *
+     * @return void
+     */
+    protected function registerServices()
+    {
+        foreach ($this->serviceBindings as $key => $value) {
+            (true === is_numeric($key)) ? $this->app->singleton($value) : $this->app->singleton($key, $value);
+        }
     }
 
     /**
