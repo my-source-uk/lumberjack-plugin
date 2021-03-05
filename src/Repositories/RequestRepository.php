@@ -62,7 +62,7 @@ class RequestRepository extends BaseRepository implements Contract
             function () use ($data) {
                 $existing = $this->model
                     ->orderBy('id', 'DESC')
-                    ->firstWhere('page_signature', $data['page_signature']);
+                    ->firstWhere('user_signature', $data['user_signature']);
 
                 if (false === is_null($existing)) {
                     // We have an existing record:
