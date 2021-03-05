@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'siteId' => 'ABCDEF',
+    'siteId' => 1,
 
     'models' => [
         'site' => Lumberjack\Models\Site::class,

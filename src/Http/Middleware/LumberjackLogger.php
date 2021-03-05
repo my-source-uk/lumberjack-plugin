@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lumberjack\Jobs\LumberjackLoggerJob;
+use Carbon\Carbon;
 
 class LumberjackLogger
 {
@@ -41,13 +42,14 @@ class LumberjackLogger
             'referrer' => $referrer,
             'agent' => $request->header('User-Agent'),
             'ip' => $request->ip(),
-            'siteId' => Config::get('lumberjack.siteId'),
+            'site_id' => Config::get('lumberjack.siteId'),
             'hostname' => $hostname,
             'pathname' => $pathname,
+            'timestamp' => Carbon::now('UTC')->startOfHour(),
         ];
 
         // Build the two hashes.
-        $user = Hash::make($data['salt'].$data['ip'].$data['agent'].$data['siteId'].$data['hostname']);
+        $user = Hash::make($data['salt'].$data['ip'].$data['agent'].$data['site_id'].$data['hostname']);
         $pageRequest = Hash::make($user.$data['pathname']);
 
         // Determine the device and browser type.
@@ -91,6 +93,7 @@ class LumberjackLogger
 
         // Dispatch the job.
         LumberjackLoggerJob::dispatch($data);
+        // LumberjackLoggerJob::dispatchAfterResponse($data);
 
         // Continue with the request.
         return $next($request);
