@@ -63,14 +63,15 @@ class RequestRepository extends BaseRepository implements Contract
                 $existing = $this->model
                     ->orderBy('id', 'DESC')
                     ->firstWhere('page_signature', $data['page_signature']);
-                    
+
                 if (false === is_null($existing)) {
                     // We have an existing record:
                     $data['is_new_visit'] = false;
                     $data['is_new_session'] = false;
                     $data['is_unique'] = false;
-                    // So we need to unset the user_signature for the previous visit.
+                    // So we need to unset the user & page signatures for the previous visit.
                     $existing->user_signature = '';
+                    $existing->page_signature = '';
                     $existing->save();
                 }
                 $this->model->create($data);
