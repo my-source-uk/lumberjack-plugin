@@ -4,7 +4,7 @@ namespace Lumberjack;
 
 use Illuminate\Support\ServiceProvider;
 use Lumberjack\Http\Middleware\LumberjackLogger;
-use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Routing\Router;
 
 class LumberjackServiceProvider extends ServiceProvider
 {
@@ -72,8 +72,8 @@ class LumberjackServiceProvider extends ServiceProvider
      */
     protected function configureMiddleware()
     {
-        $kernel = $this->app->make(Kernel::class);
+        $router = $this->app->make(Router::class);
 
-        $kernel->appendToMiddlewarePriority(LumberjackLogger::class);
+        $router->pushMiddlewareToGroup('web', LumberjackLogger::class);
     }
 }
