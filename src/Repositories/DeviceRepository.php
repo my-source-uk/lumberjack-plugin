@@ -47,4 +47,15 @@ class DeviceRepository extends BaseRepository implements Contract
     {
         return config('lumberjack.models.device');
     }
+
+    /**
+     * Increment the device count.
+     *
+     * @param String $device Device type string
+     *
+     * @return void
+     */
+    public function increment(string $device): void
+    {
+    }
 }

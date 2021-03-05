@@ -47,4 +47,16 @@ class VisitorRepository extends BaseRepository implements Contract
     {
         return config('lumberjack.models.visitor');
     }
+
+    /**
+     * Return if the visitor is unique and add to the database if needed.
+     *
+     * @param string $hash The visitor hash to check.
+     *
+     * @return Bool
+     */
+    public function isUnique(string $hash): Bool
+    {
+        return true;
+    }
 }
