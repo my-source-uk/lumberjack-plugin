@@ -88,7 +88,6 @@ class LumberjackLogger
 
         // Add the hashes to the package.
         $data['hashes'] = compact('user', 'pageRequest');
-        dd($data);
 
         // Dispatch the job.
         LumberjackLoggerJob::dispatch($data);

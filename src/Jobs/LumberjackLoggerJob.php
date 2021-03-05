@@ -79,7 +79,7 @@ class LumberjackLoggerJob implements ShouldQueue
         VisitorRepository $visitor,
         ReferrerRepository $referrer,
         DeviceRepository $device,
-        BrowserRepository $browser,
+        BrowserRepository $browser
     ) {
         $this->data = $data;
         $this->requestRepo = $request;
