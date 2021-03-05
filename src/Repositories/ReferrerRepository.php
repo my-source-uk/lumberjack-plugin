@@ -47,4 +47,18 @@ class ReferrerRepository extends BaseRepository implements Contract
     {
         return config('lumberjack.models.referrer');
     }
+
+    /**
+     * Increment the referrer count.
+     *
+     * @param Array $search Data to search for
+     *
+     * @return void
+     */
+    public function increment(array $search): void
+    {
+        $model = $this->model->firstOrNew($search);
+        $model->referrals++;
+        $model->save();
+    }
 }

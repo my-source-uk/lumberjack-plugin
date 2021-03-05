@@ -67,7 +67,7 @@ class LumberjackLoggerJob implements ShouldQueue
                 'referrer_pathname' => '',
                 'timestamp' => $this->data['timestamp'],
             ];
-            $referrer->create($data);
+            $referrer->increment($data);
         }
 
         // Step 3 - Device & Browser (when unique visitor)
