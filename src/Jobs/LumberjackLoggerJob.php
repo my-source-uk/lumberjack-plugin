@@ -27,41 +27,6 @@ class LumberjackLoggerJob implements ShouldQueue
     protected $data;
 
     /**
-     * Device Repository.
-     *
-     * @var DeviceRepository
-     */
-    protected $deviceRepo;
-
-    /**
-     * Request Repository.
-     *
-     * @var RequestRepository
-     */
-    protected $requestRepo;
-
-    /**
-     * Referrer Repository.
-     *
-     * @var ReferrerRepository
-     */
-    protected $referrerRepo;
-
-    /**
-     * Visitor Repository.
-     *
-     * @var VisitorRepository
-     */
-    protected $visitorRepo;
-
-    /**
-     * Browser Repository.
-     *
-     * @var BrowserRepository
-     */
-    protected $browserRepo;
-
-    /**
      * Create a new job instance.
      *
      * @param array $data Data to add.
