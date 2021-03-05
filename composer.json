@@ -1,8 +1,8 @@
 {
-    "name": "my-source-uk/lumberjack-plugin",
+    "name": "my-sourc-uk/lumberjack-plugin",
     "description": "LumberJack - Logging laravel plugin for site usage the easy way.",
     "keywords": [
-        "my-source-uk",
+        "my-source",
         "lumberjack"
     ],
     "homepage": "https://github.com/my-source-uk/lumberjack-plugin",
@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.1 || ^8.0",
+        "php": "^7.1|^8.0",
         "illuminate/support": "^6.0"
     },
     "require-dev": {
