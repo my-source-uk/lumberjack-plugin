@@ -12,4 +12,14 @@ return [
         'browser_stats' => Lumberjack\Models\Stats\Browser::class,
         'device_stats' => Lumberjack\Models\Stats\Device::class,
     ],
+
+    'table_names' => [
+        'sites' => 'sites',
+        'visitors' => 'visitors',
+        'requests' => 'requests',
+        'page_stats' => 'page_stats',
+        'referrer_stats' => 'referrer_stats',
+        'browser_stats' => 'browser_stats',
+        'device_stats' => 'device_stats',
+    ],
 ];
