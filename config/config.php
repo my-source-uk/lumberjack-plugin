@@ -4,13 +4,13 @@ return [
     'siteId' => 'ABCDEF',
 
     'models' => [
-        'sites' => Lumberjack\Models\Site::class,
-        'visitors' => Lumberjack\Models\Visitor::class,
-        'requests' => Lumberjack\Models\Request::class,
-        'page_stats' => Lumberjack\Models\Stats\Page::class,
-        'referrer_stats' => Lumberjack\Models\Stats\Referrer::class,
-        'browser_stats' => Lumberjack\Models\Stats\Browser::class,
-        'device_stats' => Lumberjack\Models\Stats\Device::class,
+        'site' => Lumberjack\Models\Site::class,
+        'visitor' => Lumberjack\Models\Visitor::class,
+        'request' => Lumberjack\Models\Request::class,
+        'page' => Lumberjack\Models\Page::class,
+        'referrer' => Lumberjack\Models\Referrer::class,
+        'browser' => Lumberjack\Models\Browser::class,
+        'device' => Lumberjack\Models\Device::class,
     ],
 
     'table_names' => [
