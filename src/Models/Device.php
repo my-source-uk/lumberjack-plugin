@@ -20,6 +20,13 @@ class Device extends Model
     use Migratable;
 
     /**
+     * Set the database connection.
+     *
+     * @var string
+     */
+    protected $connection = 'lumberjack';
+
+    /**
      * The attributes that can be filled.
      *
      * @var string[]

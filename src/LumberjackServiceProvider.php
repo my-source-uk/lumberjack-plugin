@@ -5,6 +5,7 @@ namespace Lumberjack;
 use Illuminate\Support\ServiceProvider;
 use Lumberjack\Http\Middleware\LumberjackLogger;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Config;
 
 class LumberjackServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,7 @@ class LumberjackServiceProvider extends ServiceProvider
                 'lumberjack-config'
             );
         }//end if
+        Config::set('database.connections.lumberjack', Config::get('lumberjack.database.connections.lumberjack'));
 
         $this->configureMiddleware();
     }
