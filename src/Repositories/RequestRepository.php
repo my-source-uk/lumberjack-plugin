@@ -58,7 +58,7 @@ class RequestRepository extends BaseRepository implements Contract
      */
     public function add(array $data): void
     {
-        DB::transaction(
+        DB::connection('lumberjack')->transaction(
             function () use ($data) {
                 $existing = $this->model->firstWhere('page_signature', $data['pageRequest']);
                 if (false !== $existing) {
