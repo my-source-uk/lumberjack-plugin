@@ -29,4 +29,13 @@ interface RequestRepository
      * @return String Account Model
      **/
     public function model();
+
+    /**
+     * Add a new request into the system.
+     *
+     * @param Array $data The data to updateOrCreate.
+     *
+     * @return void
+     */
+    public function add(array $data): void;
 }

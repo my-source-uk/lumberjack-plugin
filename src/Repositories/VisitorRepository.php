@@ -57,6 +57,13 @@ class VisitorRepository extends BaseRepository implements Contract
      */
     public function isUnique(string $hash): Bool
     {
-        return true;
+        $isUnique = $this->model->where('user_signature', $hash)->firstOr(
+            function () use ($hash) {
+                $this->create(['user_signature' => $hash]);
+                return false;
+            }
+        );
+
+        return !$isUnique;
     }
 }

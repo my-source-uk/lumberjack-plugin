@@ -47,4 +47,18 @@ class BrowserRepository extends BaseRepository implements Contract
     {
         return config('lumberjack.models.browser');
     }
+
+    /**
+     * Increment the browser count.
+     *
+     * @param Array $search Data to search for
+     *
+     * @return void
+     */
+    public function increment(array $search): void
+    {
+        $model = $this->model->firstOrNew($search);
+        $model->count++;
+        $model->save();
+    }
 }

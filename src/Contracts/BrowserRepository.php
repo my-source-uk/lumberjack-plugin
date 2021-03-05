@@ -29,4 +29,13 @@ interface BrowserRepository
      * @return String Account Model
      **/
     public function model();
+
+    /**
+     * Increment the browser count.
+     *
+     * @param Array $search Data to search for
+     *
+     * @return void
+     */
+    public function increment(array $search): void;
 }

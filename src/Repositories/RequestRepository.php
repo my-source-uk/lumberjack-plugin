@@ -2,6 +2,7 @@
 
 namespace Lumberjack\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Lumberjack\Contracts\RequestRepository as Contract;
 
 use Lumberjack\Models\Request;
@@ -46,5 +47,31 @@ class RequestRepository extends BaseRepository implements Contract
     public function model()
     {
         return config('lumberjack.models.request');
+    }
+
+    /**
+     * Add a new request into the system.
+     *
+     * @param Array $data The data to updateOrCreate.
+     *
+     * @return void
+     */
+    public function add(array $data): void
+    {
+        DB::transaction(
+            function () use ($data) {
+                $existing = $this->model->firstWhere('page_signature', $data['pageRequest']);
+                if (false !== $existing) {
+                    // We have an existing record:
+                    $data['is_new_visit'] = false;
+                    $data['is_new_session'] = false;
+                    $data['is_unique'] = false;
+                    // So we need to unset the user_signature for the previous visit.
+                    $existing->user_signature = '';
+                    $existing->save();
+                }
+                $this->model->create($data);
+            }
+        );
     }
 }

@@ -52,10 +52,14 @@ class DeviceRepository extends BaseRepository implements Contract
      * Increment the device count.
      *
      * @param String $device Device type string
+     * @param Array  $search Data to search for
      *
      * @return void
      */
-    public function increment(string $device): void
+    public function increment(string $device, array $search): void
     {
+        $model = $this->model->firstOrNew($search);
+        $model->$device++;
+        $model->save();
     }
 }
