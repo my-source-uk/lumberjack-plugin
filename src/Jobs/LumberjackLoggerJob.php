@@ -74,7 +74,7 @@ class LumberjackLoggerJob implements ShouldQueue
         if (true === $uniqueVisitor) {
             $search = [
                 'site_id' => 1,
-                'timestamp' => $this->data['referrer'],
+                'timestamp' => $this->data['timestamp'],
             ];
             // Step 3a - Device Type
             if (true === $this->data['mobile']) {
