@@ -27,7 +27,7 @@ class LumberjackLogger
         }
 
         // Process the incoming path:
-        $pathname = $request->path();
+        $pathname = ('/' === $request->path()) ? '/' : '/'.$request->path();
         $hostname = ('/' !== $pathname) ? Str::before($request->url(), $pathname) : $request->url();
         // Determine if we have an external referer:
         $referrer = $request->header('referer');
