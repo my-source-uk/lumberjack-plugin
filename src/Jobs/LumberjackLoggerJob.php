@@ -62,7 +62,7 @@ class LumberjackLoggerJob implements ShouldQueue
         // Step 2 - Referrer
         if ('' !== $this->data['referrer'] && false === is_null($this->data['referrer'])) {
             $data = [
-                'site_id' => 1,
+                'site_id' => $this->data['site_id'],
                 'referrer_hostname' => $this->data['referrer'],
                 'referrer_pathname' => '',
                 'timestamp' => $this->data['timestamp'],
@@ -73,7 +73,7 @@ class LumberjackLoggerJob implements ShouldQueue
         // Step 3 - Device & Browser (when unique visitor)
         if (true === $uniqueVisitor) {
             $search = [
-                'site_id' => 1,
+                'site_id' => $this->data['site_id'],
                 'timestamp' => $this->data['timestamp'],
             ];
             // Step 3a - Device Type
