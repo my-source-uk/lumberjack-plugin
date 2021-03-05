@@ -78,7 +78,7 @@ class Device extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->setTable(config('lumberjack.table_names.devices'));
+        $this->setTable(config('lumberjack.table_names.device_stats'));
         parent::__construct($attributes);
     }
 }

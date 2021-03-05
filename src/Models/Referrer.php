@@ -81,7 +81,7 @@ class Referrer extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->setTable(config('lumberjack.table_names.referrers'));
+        $this->setTable(config('lumberjack.table_names.referrer_stats'));
         parent::__construct($attributes);
     }
 }

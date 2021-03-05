@@ -81,7 +81,7 @@ class Browser extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->setTable(config('lumberjack.table_names.browsers'));
+        $this->setTable(config('lumberjack.table_names.browser_stats'));
         parent::__construct($attributes);
     }
 }
