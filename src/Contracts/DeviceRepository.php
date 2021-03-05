@@ -29,4 +29,13 @@ interface DeviceRepository
      * @return String Account Model
      **/
     public function model();
+
+    /**
+     * Increment the device count.
+     *
+     * @param String $device Device type string
+     *
+     * @return void
+     */
+    public function increment(string $device): void;
 }
