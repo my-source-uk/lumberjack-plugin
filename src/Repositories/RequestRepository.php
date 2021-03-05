@@ -69,9 +69,10 @@ class RequestRepository extends BaseRepository implements Contract
                     $data['is_new_visit'] = false;
                     $data['is_new_session'] = false;
                     $data['is_unique'] = false;
-                    // So we need to unset the user & page signatures for the previous visit.
+                    // So we need to update the previous visit.
                     $existing->user_signature = '';
                     $existing->page_signature = '';
+                    $existing->is_bounce = false;
                     $existing->save();
                 }
                 $this->model->create($data);
