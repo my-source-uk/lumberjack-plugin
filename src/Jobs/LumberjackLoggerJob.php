@@ -59,22 +59,33 @@ class LumberjackLoggerJob implements ShouldQueue
     ) {
         // Step 1 - Start with checking for visitor uniqueness
         $uniqueVisitor = $visitor->isUnique($this->data['hashes']['user']);
-
         // Step 2 - Referrer
-        if ('' !== $this->data['referrer']) {
-            $referrer->create($this->data['referrer']);
+        if ('' !== $this->data['referrer'] && false === is_null($this->data['referrer'])) {
+            $data = [
+                'site_id' => 1,
+                'referrer_hostname' => $this->data['referrer'],
+                'referrer_pathname' => '',
+                'timestamp' => $this->data['timestamp'],
+            ];
+            $referrer->create($data);
         }
 
         // Step 3 - Device & Browser (when unique visitor)
         if (true === $uniqueVisitor) {
+            $search = [
+                'site_id' => 1,
+                'timestamp' => $this->data['referrer'],
+            ];
             // Step 3a - Device Type
             if (true === $this->data['mobile']) {
-                $device->increment('mobile');
+                $device->increment('mobile', $search);
             } else {
-                $device->increment('desktop');
+                $device->increment('desktop', $search);
             }
+            $search['browser'] = $this->data['browser']['name'];
+            $search['version'] = $this->data['browser']['version'];
             // Step 3b - Browser and version
-            $browser->increment($this->data['browser']);
+            $browser->increment($search);
         }
 
         // Step 4 - Add the page request entry
