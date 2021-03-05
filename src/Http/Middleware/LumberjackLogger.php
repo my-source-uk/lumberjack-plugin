@@ -85,7 +85,6 @@ class LumberjackLogger
         unset($data['agent']);
         unset($data['salt']);
         unset($data['ip']);
-        unset($data['hostname']);
 
         // Add the hashes to the package.
         $data = array_merge($data, compact('user_signature', 'page_signature'));
