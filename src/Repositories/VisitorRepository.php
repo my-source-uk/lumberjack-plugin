@@ -51,7 +51,7 @@ class VisitorRepository extends BaseRepository implements Contract
     /**
      * Return if the visitor is unique and add to the database if needed.
      *
-     * @param string $hash The visitor hash to check.
+     * @param String $hash The visitor hash to check.
      *
      * @return Bool
      */

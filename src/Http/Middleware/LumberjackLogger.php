@@ -5,7 +5,6 @@ namespace Lumberjack\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lumberjack\Jobs\LumberjackLoggerJob;
 use Carbon\Carbon;
@@ -38,7 +37,7 @@ class LumberjackLogger
 
         // Compile base data array.
         $data = [
-            'salt' => Config::get('lumberjack.salt'),
+            'salt' => hash('sha256', Config::get('lumberjack.siteId').date('z')),
             'referrer' => $referrer,
             'agent' => $request->header('User-Agent'),
             'ip' => $request->ip(),
@@ -49,8 +48,8 @@ class LumberjackLogger
         ];
 
         // Build the two hashes.
-        $user = Hash::make($data['salt'].$data['ip'].$data['agent'].$data['site_id'].$data['hostname']);
-        $pageRequest = Hash::make($user.$data['pathname']);
+        $user_signature = hash('sha512', $data['salt'].$data['ip'].$data['agent'].$data['site_id'].$data['hostname']);
+        $page_signature = hash('sha512', $user_signature.$data['pathname']);
 
         // Determine the device and browser type.
         $data['mobile'] = Str::contains($data['agent'], 'Mobi');
@@ -89,7 +88,7 @@ class LumberjackLogger
         unset($data['hostname']);
 
         // Add the hashes to the package.
-        $data['hashes'] = compact('user', 'pageRequest');
+        $data = array_merge($data, compact('user_signature', 'page_signature'));
 
         // Dispatch the job.
         LumberjackLoggerJob::dispatch($data);
