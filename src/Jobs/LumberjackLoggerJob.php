@@ -58,7 +58,7 @@ class LumberjackLoggerJob implements ShouldQueue
         BrowserRepository $browser
     ) {
         // Step 1 - Start with checking for visitor uniqueness
-        $uniqueVisitor = $visitor->isUnique($this->data['user_signature']);
+        $uniqueVisitor = $visitor->isUnique($this->data['user_signature'], $this->data['site_id']);
         // Step 2 - Referrer
         if ('' !== $this->data['referrer'] && false === is_null($this->data['referrer'])) {
             $data = [

@@ -60,20 +60,23 @@ class RequestRepository extends BaseRepository implements Contract
     {
         DB::connection('lumberjack')->transaction(
             function () use ($data) {
-                $existing = $this->model
+                $visitor = $this->model
                     ->orderBy('id', 'DESC')
                     ->firstWhere('user_signature', $data['user_signature']);
 
-                if (false === is_null($existing)) {
-                    // We have an existing record:
+                $page = $this->model
+                    ->orderBy('id', 'DESC')
+                    ->firstWhere('page_signature', $data['page_signature']);
+
+                if (false === is_null($visitor)) {
+                    // We have an visitor record:
                     $data['is_new_visit'] = false;
                     $data['is_new_session'] = false;
-                    $data['is_unique'] = false;
+                    $data['is_unique'] = is_null($page);
                     // So we need to update the previous visit.
-                    $existing->user_signature = '';
-                    $existing->page_signature = '';
-                    $existing->is_bounce = false;
-                    $existing->save();
+                    $visitor->user_signature = '';
+                    $visitor->is_bounce = false;
+                    $visitor->save();
                 }
                 $this->model->create($data);
             }

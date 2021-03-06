@@ -33,9 +33,10 @@ interface VisitorRepository
     /**
      * Return if the visitor is unique and add to the database if needed.
      *
-     * @param string $hash The visitor hash to check.
+     * @param String $hash   The visitor hash to check.
+     * @param Int    $siteId The site_id to store against.
      *
      * @return Bool
      */
-    public function isUnique(string $hash): Bool;
+    public function isUnique(string $hash, int $siteId): Bool;
 }

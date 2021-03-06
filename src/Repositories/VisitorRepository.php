@@ -51,15 +51,21 @@ class VisitorRepository extends BaseRepository implements Contract
     /**
      * Return if the visitor is unique and add to the database if needed.
      *
-     * @param String $hash The visitor hash to check.
+     * @param String $hash   The visitor hash to check.
+     * @param Int    $siteId The site_id to store against.
      *
      * @return Bool
      */
-    public function isUnique(string $hash): Bool
+    public function isUnique(string $hash, int $siteId): Bool
     {
         $isUnique = $this->model->where('user_signature', $hash)->firstOr(
-            function () use ($hash) {
-                $this->create(['user_signature' => $hash]);
+            function () use ($hash, $siteId) {
+                $this->create(
+                    [
+                        'site_id' => $siteId,
+                        'user_signature' => $hash
+                    ]
+                );
                 return false;
             }
         );
