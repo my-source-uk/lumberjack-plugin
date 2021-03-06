@@ -76,6 +76,14 @@ class LumberjackServiceProvider extends ServiceProvider
     {
         $router = $this->app->make(Router::class);
 
-        $router->pushMiddlewareToGroup('web', LumberjackLogger::class);
+        $groups = Config::get('lumberjack.middlewaregroups', 'web');
+
+        if (false === is_array($groups)) {
+            $groups = [$groups];
+        }
+        
+        foreach ($groups as $group) {
+            $router->pushMiddlewareToGroup($group, LumberjackLogger::class);
+        }
     }
 }

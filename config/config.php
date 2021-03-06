@@ -3,6 +3,8 @@
 return [
     'siteId' => env('LUMBERJACK_SITE_ID'),
 
+    'middelwaregroups' => ['web'],
+
     'models' => [
         'site' => Lumberjack\Models\Site::class,
         'visitor' => Lumberjack\Models\Visitor::class,
