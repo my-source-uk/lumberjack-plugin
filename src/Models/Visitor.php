@@ -32,6 +32,7 @@ class Visitor extends Model
      * @var string[]
      */
     public $fillable = [
+        'site_id',
         'user_signature',
     ];
 
@@ -42,6 +43,7 @@ class Visitor extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'site_id' => 'integer',
         'user_signature' => 'string',
     ];
 
@@ -51,6 +53,7 @@ class Visitor extends Model
      * @var array
      */
     public static $rules = [
+        'site_id' => 'required',
         'user_signature' => 'required',
     ];
 
