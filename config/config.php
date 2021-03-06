@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'siteId' => 1,
+    'siteId' => env('LUMBERJACK_SITE_ID'),
 
     'models' => [
         'site' => Lumberjack\Models\Site::class,

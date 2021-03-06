@@ -90,8 +90,7 @@ class LumberjackLogger
         $data = array_merge($data, compact('user_signature', 'page_signature'));
 
         // Dispatch the job.
-        LumberjackLoggerJob::dispatch($data);
-        // LumberjackLoggerJob::dispatchAfterResponse($data);
+        LumberjackLoggerJob::dispatchAfterResponse($data);
 
         // Continue with the request.
         return $next($request);
