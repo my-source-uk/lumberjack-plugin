@@ -5,6 +5,7 @@ namespace Lumberjack;
 use Illuminate\Support\ServiceProvider;
 use Lumberjack\Http\Middleware\LumberjackLogger;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 
 class LumberjackServiceProvider extends ServiceProvider
@@ -30,8 +31,16 @@ class LumberjackServiceProvider extends ServiceProvider
             );
         }//end if
         Config::set('database.connections.lumberjack', Config::get('lumberjack.database.connections.lumberjack'));
+        
+        $this->publishes(
+            [
+            __DIR__.'/../public' => public_path('vendor/lumberjack'),
+            ],
+            'lumberjack-assets'
+        );
 
         $this->configureMiddleware();
+        $this->registerRoutes();
     }
 
     /**
@@ -65,6 +74,30 @@ class LumberjackServiceProvider extends ServiceProvider
         foreach ($this->serviceBindings as $key => $value) {
             (true === is_numeric($key)) ? $this->app->singleton($value) : $this->app->singleton($key, $value);
         }
+    }
+
+    /**
+     * Register the routes.
+     *
+     * @return void
+     */
+    protected function registerRoutes()
+    {
+        Route::group(
+            [
+            'domain' => config('horizon.domain', null),
+            'prefix' => 'lumberjack',
+            ],
+            function () {
+                Route::match(
+                    ['post'],
+                    '/bye',
+                    function () {
+                        return json_encode('Goodbye 👋');
+                    }
+                )->name('lumberjack.bye');
+            }
+        );
     }
 
     /**
