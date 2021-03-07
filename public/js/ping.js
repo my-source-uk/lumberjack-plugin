@@ -1,9 +1,9 @@
-window.addEventListener('beforeunload', function(event) {
-    // or 'unload'
-    navigator.sendBeacon('/lumberjack/bye');
-    // more safely (optional...?)
-    var until = new Date()
-        .getTime() + 100;
-    while (new Date()
-        .getTime() < until);
+document.addEventListener('visibilitychange', function logData() {
+    if (document.visibilityState === 'hidden') {
+        navigator.sendBeacon('/lumberjack/bye');
+        var until = new Date()
+            .getTime() + 100;
+        while (new Date()
+            .getTime() < until);
+    }
 });

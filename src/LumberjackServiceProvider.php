@@ -90,7 +90,7 @@ class LumberjackServiceProvider extends ServiceProvider
             ],
             function () {
                 Route::match(
-                    ['post'],
+                    ['get','post'],
                     '/bye',
                     function () {
                         return json_encode('Goodbye 👋');
