@@ -61,6 +61,7 @@ class LumberjackLogger
             'Chrome' => '/Chrome\/([0-9\.]*)/i',
             'Opera' => '/OPR|Opera\/([0-9\.]*)/i',
             'Internet Explorer' => '/; (?:MSIE |Trident\/7\.0\; rv\:)([0-9\.]*)/i',
+            'Bot' => '/bot|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex/i',
         ];
         // Note: do not change order - it is very important!
 
