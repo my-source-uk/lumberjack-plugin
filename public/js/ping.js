@@ -1,6 +1,6 @@
 var hasLumberjackSaidBye = false;
 var lumberjackBye = function() {
-    if (!hasLumberjackSaidBye) return true;
+    if (hasLumberjackSaidBye) return true;
     navigator.sendBeacon('/lumberjack/bye');
     var until = new Date()
         .getTime() + 100;
@@ -15,9 +15,9 @@ document.addEventListener('visibilitychange', function logData() {
         hasLumberjackSaidBye = false;
     }
 });
-window.onbeforeunload(function() {
-    lumberjackBye();
-});
-window.onunload(function() {
-    lumberjackBye();
-});
+window.onbeforeunload = function() {
+    return lumberjackBye();
+};
+window.onunload = function() {
+    return lumberjackBye();
+};
