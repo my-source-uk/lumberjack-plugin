@@ -85,17 +85,17 @@ class LumberjackServiceProvider extends ServiceProvider
     {
         Route::group(
             [
-            'domain' => config('horizon.domain', null),
             'prefix' => 'lumberjack',
+            'middleware' => 'web',
             ],
             function () {
-                Route::match(
-                    ['get','post'],
+                Route::post(
                     '/bye',
                     function () {
-                        return json_encode('Goodbye 👋');
+                        return true;
                     }
-                )->name('lumberjack.bye');
+                )
+                ->name('lumberjack.bye');
             }
         );
     }
