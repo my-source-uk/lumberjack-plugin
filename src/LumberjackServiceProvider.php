@@ -2,11 +2,11 @@
 
 namespace Lumberjack;
 
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Lumberjack\Http\Middleware\LumberjackLogger;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Config;
 
 class LumberjackServiceProvider extends ServiceProvider
 {
@@ -31,10 +31,10 @@ class LumberjackServiceProvider extends ServiceProvider
             );
         }//end if
         Config::set('database.connections.lumberjack', Config::get('lumberjack.database.connections.lumberjack'));
-        
+
         $this->publishes(
             [
-            __DIR__.'/../public' => public_path('vendor/lumberjack'),
+                __DIR__.'/../public' => public_path('vendor/lumberjack'),
             ],
             'lumberjack-assets'
         );
@@ -85,8 +85,8 @@ class LumberjackServiceProvider extends ServiceProvider
     {
         Route::group(
             [
-            'prefix' => 'lumberjack',
-            'middleware' => 'web',
+                'prefix' => 'lumberjack',
+                'middleware' => 'web',
             ],
             function () {
                 Route::post(
@@ -114,7 +114,7 @@ class LumberjackServiceProvider extends ServiceProvider
         if (false === is_array($groups)) {
             $groups = [$groups];
         }
-        
+
         foreach ($groups as $group) {
             $router->pushMiddlewareToGroup($group, LumberjackLogger::class);
         }
