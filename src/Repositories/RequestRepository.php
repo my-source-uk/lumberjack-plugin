@@ -75,7 +75,7 @@ class RequestRepository extends BaseRepository implements Contract
                     $data['is_unique'] = is_null($page);
                     // So we need to update the previous visit.
                     $visitor->user_signature = '';
-                    $visitor->is_bounce = false;
+                    $visitor->is_bounce = ('/lumberjack/bye' === $data['pathname']);
                     $visitor->save();
                 }
                 $this->model->create($data);
