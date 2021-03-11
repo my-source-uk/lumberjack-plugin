@@ -19,8 +19,8 @@ document.addEventListener('visibilitychange', function logData() {
     }
 });
 window.onbeforeunload = function() {
-    return lumberjackBye();
+    lumberjackBye();
 };
 window.onunload = function() {
-    return lumberjackBye();
+    lumberjackBye();
 };
