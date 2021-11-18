@@ -18,6 +18,9 @@ class LumberjackServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (true === $this->app->environment(['testing'])) {
+            return;
+        }
         /*
          * Optional methods to load your package assets
          */
